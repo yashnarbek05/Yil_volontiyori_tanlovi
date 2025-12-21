@@ -320,6 +320,7 @@ async def comment_tashabbuskor(update: Update, context: ContextTypes.DEFAULT_TYP
         }
 
     await update.message.reply_text(messages.get(context.user_data.get('language'), messages.get('uz')), parse_mode="Markdown")
+    await add_voter(user_id, context.user_data.get('contact'), context.user_data.get('guruh', '-'), context.user_data.get('tavsiya', '-'))
     return GURUH
 
 async def guruh(update: Update, context: ContextTypes.DEFAULT_TYPE):

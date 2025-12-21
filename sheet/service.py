@@ -60,16 +60,27 @@ async def is_registreted(user_id):
     
     users = await get_values_from_sheet(OVOZ_BERUVCHI_SHEET_NAME)
 
-    for user in users:
-        if str(user_id) == user[0]:
-            return True
+    for i in range (0, len(users)):
+        if str(user_id) == users[i][0]:
+            return True, i
     
     return False
 
 
 async def add_voter(user_id, contact, guruh, tavsiya):
+    is_sub, index = is_registreted(user_id)
+    
+    if is_sub:
+        request = service.spreadsheets().values().update(spreadsheetId=GOOGLE_SHEET_URL, range=f'{OVOZ_BERUVCHI_SHEET_NAME}!B{index + 2}:D{index + 2}',
+                                                     valueInputOption="RAW",
+                                                     body={"values": [[guruh, tavsiya]]})
+        response = request.execute()
+
+        return response.get("updatedRows")
 
     users = await get_values_from_sheet(OVOZ_BERUVCHI_SHEET_NAME)
+
+
 
     request = service.spreadsheets().values().update(spreadsheetId=GOOGLE_SHEET_URL, range=f'{OVOZ_BERUVCHI_SHEET_NAME}!A{len(users) + 2}:D{len(users) + 2}',
                                                      valueInputOption="RAW",
