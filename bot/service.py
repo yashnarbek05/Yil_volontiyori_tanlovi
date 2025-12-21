@@ -270,7 +270,7 @@ async def comment_volontiyor(update: Update, context: ContextTypes.DEFAULT_TYPE)
 async def fullname_tashabbuskor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user_fullname = update.message.text
 
-    result = all(not char.isnumeric() for char in user_fullname)
+    result = all(not char.isnumeric() for char in user_fullname) and len(user_fullname.split(" ")) != 1
 
     if not result:
         messages = {
@@ -300,7 +300,7 @@ async def comment_tashabbuskor(update: Update, context: ContextTypes.DEFAULT_TYP
 
     context.user_data["com_tash"] = com_tash
 
-    await add_volontiyor_or_tashabbuskor(context.user_data.get('vol'), user_id, context.user_data.get('com_tash'), ENG_YAXSHI_TASHABBUSKOR_SHEET_NAME)
+    await add_volontiyor_or_tashabbuskor(context.user_data.get('tash'), user_id, context.user_data.get('com_tash'), ENG_YAXSHI_TASHABBUSKOR_SHEET_NAME)
 
     messages = {
             'uz': (
