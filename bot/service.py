@@ -30,7 +30,7 @@ async def start(update, context):
     
     if await is_registreted(user_id) or user_id in BANNED:
 
-        await update.message.reply_text("Siz allaqachon ko'nkursda ishtirok etmoqdasiz.\nUshbu buyruqni berish orqali to'plagan ballingizni ko'rishingiz mumkin /myscore!")
+        await update.message.reply_text("Siz allaqachon tanlovda o'z ovozingizni berib bo'ldingiz.\n🌟 Ishtirokingiz uchun tashakkur!❤️")
 
         clear_datas(context)
         return ConversationHandler.END
