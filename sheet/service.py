@@ -39,8 +39,8 @@ async def get_winnerss(sheet_name):
     rows = await get_values_from_sheet(sheet_name)
 
     pairs = [
-        (normalize(row[0]), normalize(row[1]))
-        for row in rows
+    tuple(sorted([normalize(row[0]), normalize(row[1])]))
+    for row in rows
     ]
 
     counter = Counter(pairs)
@@ -48,11 +48,13 @@ async def get_winnerss(sheet_name):
     most_common = counter.most_common(WINNERS_COUNT)
 
     winners = []
-    for (norm_surname, norm_name), count in most_common:
+    for (norm_a, norm_b), count in most_common:
         for row in rows:
-            if normalize(row[0]) == norm_surname and normalize(row[1]) == norm_name:
+            key = tuple(sorted([normalize(row[0]), normalize(row[1])]))
+            if key == (norm_a, norm_b):
                 winners.append((row[0], row[1], count))
-                break  # faqat birinchi mos keladigan satrni olamiz
+                break
+
     return winners
 
 
