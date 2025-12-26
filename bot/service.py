@@ -218,7 +218,7 @@ async def fullname_volontiyor(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     result = all(not char.isnumeric() for char in user_fullname) and len(user_fullname.split(" ")) != 1
 
-    if not result:
+    if not result or not user_fullname:
         messages = {
             'uz': f"Siz to'liq ismni noto'g'ri kiritdingiz, \"{user_fullname}\"😕, \nqayta yuboring...",
             'ru': f"Вы неправильно ввели свое полное имя: \"{user_fullname}\"😕, \nотправьте еще раз...",
@@ -272,7 +272,7 @@ async def fullname_tashabbuskor(update: Update, context: ContextTypes.DEFAULT_TY
 
     result = all(not char.isnumeric() for char in user_fullname) and len(user_fullname.split(" ")) != 1
 
-    if not result:
+    if not result or not user_fullname:
         messages = {
             'uz': f"Siz to'liq ismni noto'g'ri kiritdingiz, \"{user_fullname}\"😕, \nqayta yuboring...",
             'ru': f"Вы неправильно ввели полное имя, \"{user_fullname}\"😕, \resend...",
