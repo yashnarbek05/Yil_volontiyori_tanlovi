@@ -41,6 +41,7 @@ async def get_winnerss(sheet_name):
     pairs = [
     tuple(sorted([normalize(row[0]), normalize(row[1])]))
     for row in rows
+    if row[0] != '' and row[1] != ''
     ]
 
     counter = Counter(pairs)
